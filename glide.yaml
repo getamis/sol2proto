@@ -1,0 +1,8 @@
+package: github.com/getamis/sol2proto
+import:
+- package: github.com/spf13/pflag
+  version: ^1.0.0
+- package: github.com/ethereum/go-ethereum
+  version: ^1.7.0
+  subpackages:
+  - account/abi
