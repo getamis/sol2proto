@@ -66,12 +66,23 @@ func main() {
 	}
 
 	service.Messages[grpc.EmptyReq.Name] = grpc.EmptyReq
+	service.Messages[grpc.TransactOptsReq.Name] = grpc.TransactOptsReq
 
 	for _, f := range contractAbi.Methods {
 		var inputArgs []grpc.Argument
 		var outputArgs []grpc.Argument
 		method := grpc.Method{
 			Name: f.Name,
+		}
+
+		// If it is not a const method, we need to provide
+		// more transaction options to send transactions.
+		if !f.Const {
+			inputArgs = append(inputArgs, grpc.Argument{
+				Name:    "opts",
+				Type:    grpc.TransactOptsReq.Name,
+				IsSlice: false,
+			})
 		}
 
 		for _, input := range f.Inputs {
