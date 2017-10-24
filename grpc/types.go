@@ -93,6 +93,37 @@ var EmptyReq = Message{
 	Name: "EmptyReq",
 }
 
+var TransactOptsReq = Message{
+	Name: "TransactOpts",
+	Args: []Argument{
+		{
+			Name:    "private_key",
+			IsSlice: false,
+			Type:    "string",
+		},
+		{
+			Name:    "nonce",
+			IsSlice: false,
+			Type:    "int64",
+		},
+		{
+			Name:    "value",
+			IsSlice: false,
+			Type:    "int64",
+		},
+		{
+			Name:    "gas_price",
+			IsSlice: false,
+			Type:    "int64",
+		},
+		{
+			Name:    "gas_limit",
+			IsSlice: false,
+			Type:    "int64",
+		},
+	},
+}
+
 type Message struct {
 	Name string
 	Args []Argument
