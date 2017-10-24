@@ -67,12 +67,14 @@ func main() {
 
 	service.Messages[grpc.EmptyReq.Name] = grpc.EmptyReq
 	service.Messages[grpc.TransactOptsReq.Name] = grpc.TransactOptsReq
+	service.Messages[grpc.TransactionResp.Name] = grpc.TransactionResp
 
 	for _, f := range contractAbi.Methods {
 		var inputArgs []grpc.Argument
 		var outputArgs []grpc.Argument
 		method := grpc.Method{
-			Name: f.Name,
+			Const: f.Const,
+			Name:  f.Name,
 		}
 
 		// If it is not a const method, we need to provide
