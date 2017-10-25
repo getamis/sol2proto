@@ -42,6 +42,7 @@ func (arg Argument) String() string {
 }
 
 type Method struct {
+	Const   bool
 	Name    string
 	Inputs  []Argument
 	Outputs []Argument
@@ -60,10 +61,15 @@ func (m Method) String() string {
 					return EmptyReq.Name
 				},
 				"ToOutputMsg": func() string {
-					if len(m.Outputs) > 0 {
-						return m.ResponseName()
+					// if it's not a const method, we return
+					// the transaction hash
+					if m.Const {
+						if len(m.Outputs) > 0 {
+							return m.ResponseName()
+						}
+						return EmptyReq.Name
 					}
-					return EmptyReq.Name
+					return TransactionResp.Name
 				},
 			})).Parse(methodTemplate)
 	if err != nil {
@@ -120,6 +126,17 @@ var TransactOptsReq = Message{
 			Name:    "gas_limit",
 			IsSlice: false,
 			Type:    "int64",
+		},
+	},
+}
+
+var TransactionResp = Message{
+	Name: "TransactionResp",
+	Args: []Argument{
+		{
+			Name:    "hash",
+			IsSlice: false,
+			Type:    "string",
 		},
 	},
 }
