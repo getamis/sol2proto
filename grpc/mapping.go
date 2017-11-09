@@ -17,55 +17,53 @@ import "github.com/ethereum/go-ethereum/accounts/abi"
 
 func ToGrpcArgument(in abi.Argument) Argument {
 	arg := Argument{
-		Name: in.Name,
+		Name:    in.Name,
+		IsSlice: in.Type.IsSlice,
 	}
 
-	arg.Type, arg.IsSlice = toGrpcType(in.Type)
+	arg.Type = toGrpcType(in.Type)
 	return arg
 }
 
-func toGrpcType(t abi.Type) (string, bool) {
+func toGrpcType(t abi.Type) string {
 	switch t.T {
 	case abi.IntTy:
 		if t.Size == 8 {
-			return "byte", false
+			return "byte"
 		} else if t.Size == 32 {
-			return "int32", false
+			return "int32"
 		} else if t.Size == 64 {
-			return "int64", false
+			return "int64"
 		}
-		return "bytes", false
+		return "bytes"
 	case abi.UintTy:
 		if t.Size == 8 {
-			return "byte", false
+			return "byte"
 		} else if t.Size == 32 {
-			return "uint32", false
+			return "uint32"
 		} else if t.Size == 64 {
-			return "uint64", false
+			return "uint64"
 		}
-		return "bytes", false
+		return "bytes"
 	case abi.BoolTy:
-		return "bool", false
+		return "bool"
 	case abi.StringTy:
-		return "string", false
-	case abi.SliceTy:
-		elemType, _ := toGrpcType(*t.Elem)
-		return elemType, true
+		return "string"
 	case abi.AddressTy:
-		return "string", false
+		return "string"
 	case abi.FixedBytesTy:
-		return "bytes", false
+		return "bytes"
 	case abi.BytesTy:
-		return "bytes", false
+		return "bytes"
 	case abi.HashTy:
-		return "string", false
+		return "string"
 	case abi.FixedPointTy:
 	case abi.FunctionTy:
 		fallthrough
 	default:
 	}
 
-	return "bytes", false
+	return "bytes"
 }
 
 func ToMessage(name string, args []Argument) Message {
