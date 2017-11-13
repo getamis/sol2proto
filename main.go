@@ -65,8 +65,9 @@ func main() {
 		Messages: make(map[string]grpc.Message),
 	}
 
-	service.Messages[grpc.EmptyReq.Name] = grpc.EmptyReq
+	service.Messages[grpc.Empty.Name] = grpc.Empty
 	service.Messages[grpc.TransactOptsReq.Name] = grpc.TransactOptsReq
+	service.Messages[grpc.TransactionReq.Name] = grpc.TransactionReq
 	service.Messages[grpc.TransactionResp.Name] = grpc.TransactionResp
 
 	for _, f := range contractAbi.Methods {
