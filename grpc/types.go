@@ -57,8 +57,10 @@ func (m Method) String() string {
 				"ToInputMsg": func() string {
 					if len(m.Inputs) > 0 {
 						return m.RequestName()
+					} else if m.Const {
+						return Empty.Name
 					}
-					return EmptyReq.Name
+					return TransactionReq.Name
 				},
 				"ToOutputMsg": func() string {
 					// if it's not a const method, we return
@@ -67,7 +69,7 @@ func (m Method) String() string {
 						if len(m.Outputs) > 0 {
 							return m.ResponseName()
 						}
-						return EmptyReq.Name
+						return Empty.Name
 					}
 					return TransactionResp.Name
 				},
@@ -95,8 +97,30 @@ func (m Method) ResponseName() string {
 	return util.ToCamelCase(m.Name) + "Resp"
 }
 
-var EmptyReq = Message{
-	Name: "EmptyReq",
+var TransactionReq = Message{
+	Name: "TransactionReq",
+	Args: []Argument{
+		{
+			Name:    "opts",
+			Type:    TransactOptsReq.Name,
+			IsSlice: false,
+		},
+	},
+}
+
+var TransactionResp = Message{
+	Name: "TransactionResp",
+	Args: []Argument{
+		{
+			Name:    "hash",
+			IsSlice: false,
+			Type:    "string",
+		},
+	},
+}
+
+var Empty = Message{
+	Name: "Empty",
 }
 
 var TransactOptsReq = Message{
@@ -126,17 +150,6 @@ var TransactOptsReq = Message{
 			Name:    "gas_limit",
 			IsSlice: false,
 			Type:    "int64",
-		},
-	},
-}
-
-var TransactionResp = Message{
-	Name: "TransactionResp",
-	Args: []Argument{
-		{
-			Name:    "hash",
-			IsSlice: false,
-			Type:    "string",
 		},
 	},
 }
