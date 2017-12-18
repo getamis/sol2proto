@@ -24,9 +24,8 @@ type Service struct {
 var ServiceTemplate string = `syntax = "proto3";
 
 package {{ .Package }};
-{{ range .Messages }}
-{{ . }}
-{{ end }}
+
+import "messages.proto";
 service {{ .Name }} {
 {{- range .Methods }}
     {{ . }}
@@ -37,4 +36,31 @@ service {{ .Name }} {
     // {{ . }}
 {{- end }}
 }
+`
+
+var MessagesTemplate string = `syntax = "proto3";
+
+package {{ .Package }};
+
+message Empty {
+}
+
+message TransactOpts {
+    string private_key = 1;
+    int64 nonce = 2;
+    int64 value = 3;
+    int64 gas_price = 4;
+    int64 gas_limit = 5;
+}
+
+message TransactionReq {
+    TransactOpts opts = 1;
+}
+
+message TransactionResp {
+    string hash = 1;
+}
+{{ range .Messages }}
+{{ . }}
+{{ end }}
 `
