@@ -39,7 +39,7 @@ service {{ .Name }} {
 `
 
 var MessagesTemplate string = `syntax = "proto3";
-
+import "google/protobuf/any.proto";
 package {{ .Package }};
 
 message Empty {
@@ -58,7 +58,7 @@ message TransactionReq {
 }
 
 message TransactionResp {
-    string hash = 1;
+    google.protobuf.Any tx = 1;
 }
 {{ range .Messages }}
 {{ . }}
