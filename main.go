@@ -19,7 +19,9 @@ import (
 	"html/template"
 	"io/ioutil"
 	"os"
+	"path"
 	"path/filepath"
+	"sort"
 	"strings"
 
 	"github.com/ethereum/go-ethereum/accounts/abi"
@@ -57,9 +59,10 @@ func main() {
 		Package:  pkgName,
 		Name:     "Messages",
 		Messages: make(map[string]grpc.Message),
+		Sources:  make([]string, len(abiFiles)),
 	}
 
-	for _, f := range abiFiles {
+	for i, f := range abiFiles {
 		abiString, err := ioutil.ReadFile(f)
 		if err != nil {
 			fmt.Printf("Failed to read input ABI: %v\n", err)
@@ -73,9 +76,12 @@ func main() {
 		}
 
 		srvName := util.ToCamelCase(strings.TrimSuffix(filepath.Base(f), filepath.Ext(filepath.Base(f))))
+		_, source := path.Split(f)
+		messages.Sources[i] = source
 		service := grpc.Service{
 			Package: pkgName,
 			Name:    srvName,
+			Sources: []string{source},
 		}
 
 		for _, f := range contractAbi.Methods {
@@ -140,9 +146,13 @@ func main() {
 			}
 
 			service.Events = append(service.Events, method)
-			writeServiceToFile(srvName, grpc.ServiceTemplate, service)
 		}
+		sort.Sort(service.Methods)
+		sort.Sort(service.Events)
+		sort.Sort(service.Sources)
+		writeServiceToFile(srvName, grpc.ServiceTemplate, service)
 	}
+	sort.Sort(messages.Sources)
 	writeServiceToFile(messages.Name, grpc.MessagesTemplate, messages)
 }
 
