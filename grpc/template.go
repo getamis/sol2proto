@@ -57,11 +57,12 @@ message Empty {
 }
 
 message TransactOpts {
-    string private_key = 1;
-    int64 nonce = 2;
-    int64 value = 3;
-    int64 gas_price = 4;
-    int64 gas_limit = 5;
+    string from_address = 1;
+    string private_key = 2;
+    int64 nonce = 3;
+    int64 value = 4;
+    int64 gas_price = 5;
+    int64 gas_limit = 6;
 }
 
 message TransactionReq {
