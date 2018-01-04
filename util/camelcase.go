@@ -41,8 +41,7 @@ func ToCamelCase(inputUnderScoreStr string) (camelCase string) {
 }
 
 func ToUnderScore(s string) string {
-	var camel = regexp.MustCompile("(^[^A-Z0-9]*|[A-Z0-9]*)([A-Z0-9][^A-Z]+|$)")
-
+	var camel = regexp.MustCompile("(^[^A-Z0-9]*|[A-Z]*)([A-Z]+[^A-Z]*)")
 	var a []string
 	for _, sub := range camel.FindAllStringSubmatch(s, -1) {
 		if sub[1] != "" {
@@ -52,6 +51,7 @@ func ToUnderScore(s string) string {
 			a = append(a, sub[2])
 		}
 	}
+
 	result := strings.ToLower(strings.Join(a, "_"))
 	result = strings.TrimPrefix(result, "_")
 	result = strings.TrimSuffix(result, "_")
