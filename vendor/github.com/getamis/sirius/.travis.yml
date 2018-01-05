@@ -1,0 +1,34 @@
+language: go
+
+go:
+  - 1.8
+  - 1.9
+
+services:
+  - docker
+
+addons:
+  apt:
+    packages:
+      - docker-ce
+
+before_script:
+  - sudo service mysql stop
+
+script:
+  - make test
+
+branches:
+  only:
+    - develop
+
+jobs:
+  include:
+    - stage: Release
+      if: tag =~ ^v
+      env: REV="$TRAVIS_TAG"
+      deploy:
+        provider: releases
+        skip_cleanup: true
+        on:
+          tags: true

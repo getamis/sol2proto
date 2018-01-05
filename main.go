@@ -27,8 +27,8 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	flag "github.com/spf13/pflag"
 
+	"github.com/getamis/sirius/util"
 	"github.com/getamis/sol2proto/grpc"
-	"github.com/getamis/sol2proto/util"
 )
 
 var (

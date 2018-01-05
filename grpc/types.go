@@ -19,7 +19,7 @@ import (
 	"html/template"
 	"strings"
 
-	"github.com/getamis/sol2proto/util"
+	"github.com/getamis/sirius/util"
 )
 
 type Argument struct {
