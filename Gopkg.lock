@@ -23,10 +23,10 @@
   version = "v1.7.1"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/golang/protobuf"
-  packages = ["proto"]
-  revision = "1e59b77b52bf8e4b449a57e6f79f21226d571845"
+  branch = "develop"
+  name = "github.com/getamis/sirius"
+  packages = ["util"]
+  revision = "ba9ef3aec70defb8551b3188dce9b9e9c6d4bc34"
 
 [[projects]]
   name = "github.com/spf13/pflag"
@@ -37,6 +37,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "40f785527cdf53f1d3fd4e449bdccd2769beab18509d39abb566d32274209c60"
+  inputs-digest = "6a6a03f48e69484ed5af8fbe76bf8380ef7f113c6644c444a1a6476ca3564872"
   solver-name = "gps-cdcl"
   solver-version = 1
