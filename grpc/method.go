@@ -20,6 +20,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 )
 
+// Parse gRPC methods and required message types from methods in an Ethereum contract ABI.
 func ParseMethods(abiMethods map[string]abi.Method) (methods Methods, msgs []Message) {
 	for _, f := range abiMethods {
 		method, msg := ParseMethod(f)
@@ -30,6 +31,7 @@ func ParseMethods(abiMethods map[string]abi.Method) (methods Methods, msgs []Mes
 	return
 }
 
+// Parse gRPC method and required message types from an Ethereum contract method.
 func ParseMethod(m abi.Method) (Method, []Message) {
 	method := Method{
 		Const: m.Const,

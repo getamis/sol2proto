@@ -21,6 +21,7 @@ import (
 	"github.com/getamis/sirius/util"
 )
 
+// Parse gRPC methods and required message types from events in an Ethereum contract ABI.
 func ParseEvents(abiEvents map[string]abi.Event) (methods Methods, msgs []Message) {
 	for _, ev := range abiEvents {
 		method, msg := ParseEvent(ev)
@@ -31,6 +32,7 @@ func ParseEvents(abiEvents map[string]abi.Event) (methods Methods, msgs []Messag
 	return
 }
 
+// Parse gRPC method and required message types from an Ethereum event.
 func ParseEvent(ev abi.Event) (Method, []Message) {
 	method := Method{}
 

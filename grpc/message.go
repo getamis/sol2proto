@@ -24,6 +24,7 @@ import (
 	"sort"
 )
 
+// Generate a renderable object from a list of messages
 func GenerateMessageProtoFile(name, pkgName string, sources []string, messages []Message, version string) MessageProtoFile {
 	var filteredMsgs []Message
 	var processedSources []string

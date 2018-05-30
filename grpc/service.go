@@ -26,6 +26,7 @@ import (
 	"github.com/getamis/sirius/util"
 )
 
+// Generate a renderable object and required message types from an Ethereum contract ABI
 func GenerateServiceProtoFile(srvName, pkgName string, contractABI abi.ABI, version string) (protoFile ProtoFile, msgs []Message) {
 	protoFile = ProtoFile{
 		GeneratorVersion: version,
