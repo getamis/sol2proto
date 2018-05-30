@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU Lesser General Public License
 // along with the sol2proto. If not, see <http://www.gnu.org/licenses/>.
+
 package grpc
 
 import "github.com/ethereum/go-ethereum/accounts/abi"
