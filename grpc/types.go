@@ -99,6 +99,23 @@ func (m Method) ResponseName() string {
 	return util.ToCamelCase(m.Name) + "Resp"
 }
 
+type Methods []Method
+
+// Len is part of sort.Interface.
+func (m Methods) Len() int {
+	return len(m)
+}
+
+// Swap is part of sort.Interface.
+func (m Methods) Swap(i, j int) {
+	m[i], m[j] = m[j], m[i]
+}
+
+// Less is part of sort.Interface. It is implemented by calling the "by" closure in the sorter.
+func (m Methods) Less(i, j int) bool {
+	return strings.Compare(m[i].Name, m[j].Name) < 0
+}
+
 var TransactionReq = Message{
 	Name: "TransactionReq",
 	Args: []Argument{
@@ -189,4 +206,38 @@ func (m Message) String() string {
 	}
 
 	return result.String()
+}
+
+type Messages []Message
+
+// Len is part of sort.Interface.
+func (m Messages) Len() int {
+	return len(m)
+}
+
+// Swap is part of sort.Interface.
+func (m Messages) Swap(i, j int) {
+	m[i], m[j] = m[j], m[i]
+}
+
+// Less is part of sort.Interface. It is implemented by calling the "by" closure in the sorter.
+func (m Messages) Less(i, j int) bool {
+	return strings.Compare(m[i].Name, m[j].Name) < 0
+}
+
+type Sources []string
+
+// Len is part of sort.Interface.
+func (s Sources) Len() int {
+	return len(s)
+}
+
+// Swap is part of sort.Interface.
+func (s Sources) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less is part of sort.Interface.
+func (s Sources) Less(i, j int) bool {
+	return strings.Compare(s[i], s[j]) < 0
 }
