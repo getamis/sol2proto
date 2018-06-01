@@ -12,26 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-syntax = "proto3";
+package pb
 
-package pb;
-
-message Empty {
-}
-
-message TransactOpts {
-    string from_address = 1;
-    string private_key = 2;
-    int64 nonce = 3;
-    int64 value = 4;
-    int64 gas_price = 5;
-    int64 gas_limit = 6;
-}
-
-message TransactionReq {
-    TransactOpts opts = 1;
-}
-
-message TransactionResp {
-    string tx_hash = 1;
-}
+//go:generate protoc --go_out=. messages.proto
