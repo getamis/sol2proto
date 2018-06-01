@@ -29,6 +29,12 @@
   revision = "ba9ef3aec70defb8551b3188dce9b9e9c6d4bc34"
 
 [[projects]]
+  name = "github.com/golang/protobuf"
+  packages = ["proto"]
+  revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
+  version = "v1.1.0"
+
+[[projects]]
   name = "github.com/spf13/pflag"
   packages = ["."]
   revision = "e57e3eeb33f795204c1ca35f56c44f83227c6e66"
@@ -37,6 +43,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6a6a03f48e69484ed5af8fbe76bf8380ef7f113c6644c444a1a6476ca3564872"
+  inputs-digest = "ee16f8a93b22410290939092308a88552cd0fa4fa9f2c67bafc9dafb12d30688"
   solver-name = "gps-cdcl"
   solver-version = 1
