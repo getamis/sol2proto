@@ -56,7 +56,7 @@ func ParseMethod(m abi.Method) (Method, []Message) {
 		requiredMessages = append(requiredMessages, ToMessage(method.RequestName(), method.Inputs))
 	}
 	if len(method.Outputs) > 0 {
-		requiredMessages = append(requiredMessages, ToMessage(method.RequestName(), method.Outputs))
+		requiredMessages = append(requiredMessages, ToMessage(method.ResponseName(), method.Outputs))
 	}
 
 	return method, requiredMessages
