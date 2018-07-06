@@ -116,8 +116,10 @@ func (m Methods) Less(i, j int) bool {
 	return strings.Compare(m[i].Name, m[j].Name) < 0
 }
 
+const packageName = "pb."
+
 var TransactionReq = Message{
-	Name: "TransactionReq",
+	Name: packageName + "TransactionReq",
 	Args: []Argument{
 		{
 			Name:    "opts",
@@ -128,7 +130,7 @@ var TransactionReq = Message{
 }
 
 var TransactionResp = Message{
-	Name: "TransactionResp",
+	Name: packageName + "TransactionResp",
 	Args: []Argument{
 		{
 			Name:    "hash",
@@ -139,11 +141,11 @@ var TransactionResp = Message{
 }
 
 var Empty = Message{
-	Name: "Empty",
+	Name: packageName + "Empty",
 }
 
 var TransactOptsReq = Message{
-	Name: "TransactOpts",
+	Name: packageName + "TransactOpts",
 	Args: []Argument{
 		{
 			Name:    "private_key",
